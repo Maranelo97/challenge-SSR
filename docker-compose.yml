@@ -1,0 +1,13 @@
+services:
+  dualfce_pg:
+    image: postgres:16.2
+    container_name: dualface_pg
+    restart: always
+    environment:
+      POSTGRES_DB: dualdb
+      POSTGRES_USER: udual
+      POSTGRES_PASSWORD: secret1234
+    volumes:
+      - /.db/init.sql:/docker-entrypoint-initdb.d/init.sql
+    ports:
+      - '5433:5432'

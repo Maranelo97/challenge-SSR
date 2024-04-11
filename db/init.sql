@@ -1,0 +1,3 @@
+CREATE DATABASE IF NOT EXISTS dualdb
+SELECT 'CREATE DATABASE dualdb'
+WHERE NOT EXISTS (SELECT FROM pg_database WHERE datname = 'dualdb')\gexec
