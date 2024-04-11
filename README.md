@@ -9,21 +9,20 @@ AcountsController: Controla las operaciones relacionadas con las cuentas bancari
 TransactionsController: Gestiona las transacciones financieras, permitiendo la creación de nuevas transacciones de dinero entre cuentas y la consulta de transacciones por usuario.
 Este proyecto ofrece una base sólida para el desarrollo de una aplicación de gestión financiera completa, con la posibilidad de expandir sus funcionalidades en el futuro.
 
-
-Discriminación de transacciones a terceros (pendiente) 
+Discriminación de transacciones a terceros (pendiente)
 Posible solución:
 
 Integración de API Externa para Consultar Tipos de Moneda y Realizar Conversiones Monetarias (QUEDO PENDIENTE)
 
- async convertCurrency(amount: number, fromCurrency: string, toCurrency: string): Promise<number> {
-    try {
-      // Realizamos una solicitud a la API externa para convertir la moneda
+async convertCurrency(amount: number, fromCurrency: string, toCurrency: string): Promise<number> {
+try {
+
       const response = await axios.get(`API_URL/convert?amount=${amount}&from=${fromCurrency}&to=${toCurrency}`);
 
-      // Verificamos si la solicitud fue exitosa y obtenemos la tasa de conversión
+
       const conversionRate = response.data.rate;
 
-      // Calculamos el monto convertido
+
       const convertedAmount = amount * conversionRate;
 
       return convertedAmount;
@@ -32,10 +31,9 @@ Integración de API Externa para Consultar Tipos de Moneda y Realizar Conversion
       console.error('Error al realizar la conversión de moneda:', error);
       throw new Error('Error al realizar la conversión de moneda');
     }
-  }
 
-  Esta seria una manera sencilla de implementar la comunicación a la api, y luego llamar en el service de transactions.
+}
 
+Esta seria una manera sencilla de implementar la comunicación a la api, y luego llamar en el service de transactions.
 
-
-  Por ultimo tambien quedó pendiente documentar la API con los decorators de Swagger para finalizar la documentación. 
+Por ultimo tambien quedó pendiente documentar la API con los decorators de Swagger para finalizar la documentación.
