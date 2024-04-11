@@ -13,7 +13,7 @@ export class TransactionsService {
         private readonly accountsRepository: Repository<AcountsEntity>,
     ) { }
 
-    async createTransaction(senderAccountId: string, receiverAccountId: string, amount: number, description: string): Promise<TransactionsEntity> {
+    public async createTransaction(senderAccountId: string, receiverAccountId: string, amount: number, description: string): Promise<TransactionsEntity> {
         const senderAccount = await this.accountsRepository.findOneOrFail({ where: { id: senderAccountId } });
         const receiverAccount = await this.accountsRepository.findOneOrFail({ where: { id: receiverAccountId } });
 
@@ -39,4 +39,17 @@ export class TransactionsService {
 
         return this.transactionsRepository.save(transaction);
     }
+    async getTransactionsByUserId(senderId: string): Promise<TransactionsEntity[]> {
+        const transactions = await this.transactionsRepository
+            .createQueryBuilder('transaction')
+            .where('transaction.sender_account_id = :senderId', { senderId })
+            .getMany();
+
+        if (!transactions) {
+            console.log(`Transactions for user with ID ${senderId} not found`);
+        }
+
+        return transactions;
+    }
+
 }

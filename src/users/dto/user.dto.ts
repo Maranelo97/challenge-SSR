@@ -68,7 +68,7 @@ export class UserUpdateDTO {
 }
 
 
-export class UserToProjectDTO {
+export class UserToAccountDTO {
 
     @IsNotEmpty()
     @IsUUID()

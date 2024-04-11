@@ -1,4 +1,4 @@
-import { Body, Controller, Post } from "@nestjs/common";
+import { Body, Controller, Get, Param, Post } from "@nestjs/common";
 import { TransactionsService } from "../services/transaction.service";
 import { TransactionsEntity } from "../entities/transactions.entity";
 
@@ -15,5 +15,10 @@ export class TransactionsController {
         }
 
         return await this.transactionService.createTransaction(senderAccountId, receiverAccountId, amount, description);
+    }
+
+    @Get('/:senderId')
+    async getTransactionsByUserId(@Param('senderId') senderId: string): Promise<TransactionsEntity[]> {
+        return this.transactionService.getTransactionsByUserId(senderId);
     }
 }
