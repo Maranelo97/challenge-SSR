@@ -8,18 +8,18 @@ export class AcountsController {
     constructor(private readonly accService: AcountService) {}
 
     @Post('create')
-    public async createProject(@Body() body: AcountDTO){
-        return await this.accService.createProject(body);
+    public async createAccount(@Body() body: AcountDTO){
+        return await this.accService.createAccount(body);
     }
 
     @Get('all')
-    public async getAllProjects(){
-        return await this.accService.findAllProjects();
+    public async getAllAccounts(){
+        return await this.accService.findAllAccounts();
         }
 
     @Get(':id')
-    public async getProjectById(@Param('id') id: string){
-        return await this.accService.findProjectById(id)
+    public async getAccountById(@Param('id') id: string){
+        return await this.accService.findAccountById(id)
     }
 
 

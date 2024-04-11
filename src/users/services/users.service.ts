@@ -11,7 +11,7 @@ import * as bcrypt from 'bcrypt'
 export class UsersService {
   constructor(
     @InjectRepository(UsersEntity) private readonly userRepository: Repository<UsersEntity>,
-    @InjectRepository(UsersAcountEntity) private readonly userProjectRepository: Repository<UsersAcountEntity>
+    @InjectRepository(UsersAcountEntity) private readonly userAccountRepository: Repository<UsersAcountEntity>
   ) { }
 
   public async createUser(body: UserDTO): Promise<UsersEntity> {
@@ -63,7 +63,7 @@ export class UsersService {
 
   public async relationToAccount(body: UserToAccountDTO) {
     try {
-      return await this.userProjectRepository.save(body);
+      return await this.userAccountRepository.save(body);
     } catch (err) {
       console.log(err)
     }
